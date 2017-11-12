@@ -5,7 +5,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { ConfirmDialogOptions } from './confirm-dialog/confirm-dialog-options';
 
 @Injectable()
-export class DialogsService {
+export class DialogService {
   constructor(private modalService: NgbModal) {
     
   }
@@ -14,9 +14,7 @@ export class DialogsService {
     const activeModal = this.modalService.open(ConfirmDialogComponent, { 
       size: 'sm', container: 'nb-layout' 
     });
-
-    for (const option in confirmDialogOptions) {
-      activeModal.componentInstance[option] = confirmDialogOptions[option];
-    }
+    
+    activeModal.componentInstance.options = confirmDialogOptions;
   }
 }

@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
-import { ThemeModule } from '../../../@theme/theme.module';
-import { DialogsService } from './dialogs.service';
+import { ThemeModule } from '../../@theme/theme.module';
+import { DialogService } from './dialog.service';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
@@ -15,10 +15,10 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     ConfirmDialogComponent,
   ],
   providers: [
-    DialogsService,
+    DialogService,
   ],
   entryComponents: [
     ConfirmDialogComponent,
   ]
 })
-export class DialogsModule { }
+export class DialogModule { }

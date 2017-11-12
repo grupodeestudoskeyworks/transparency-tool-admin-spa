@@ -1,8 +1,8 @@
 import { DialogOptions } from "../dialog-options";
 
 export class ConfirmDialogOptions extends DialogOptions {
-  yesButtonLabel?: string = 'Sim';
-  noButtonLabel?: string = 'Não';
+  yesButtonLabel?: string;
+  noButtonLabel?: string;
 
   onConfirm: VoidFunction;
   onCancel?: VoidFunction;

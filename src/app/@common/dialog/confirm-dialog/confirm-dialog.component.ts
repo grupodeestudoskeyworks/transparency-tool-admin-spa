@@ -8,19 +8,28 @@ import { ConfirmDialogOptions } from './confirm-dialog-options';
   selector: 'confirm-dialog',
   templateUrl: './confirm-dialog.component.html'
 })
-export class ConfirmDialogComponent extends ConfirmDialogOptions {
+export class ConfirmDialogComponent {
   constructor(private activeModal: NgbActiveModal) {
-    super();
+  }
+
+  options: ConfirmDialogOptions;
+
+  get yesButtonLabel(): string { 
+    return this.options.yesButtonLabel || 'Sim';
+  }
+
+  get noButtonLabel(): string { 
+    return this.options.noButtonLabel || 'Não';
   }
 
   confirm(): void {
-    this.onConfirm();
+    this.options.onConfirm();
     this.activeModal.close();
   }
 
   cancel(): void {
-    if (this.onCancel instanceof Function)
-      this.onCancel();
+    if (this.options.onCancel instanceof Function)
+      this.options.onCancel();
     this.activeModal.close();
   }
 
