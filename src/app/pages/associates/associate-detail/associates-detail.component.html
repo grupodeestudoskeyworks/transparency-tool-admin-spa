@@ -3,7 +3,7 @@
     <nb-card>
         <toaster-container [toasterconfig]="toasterConfigService.getDefaultConfig()"></toaster-container>
 
-        <nb-card-header>Cadastro do associado</nb-card-header>
+        <nb-card-header><i class="fa fa-bars"></i> Cadastro do associado</nb-card-header>
         <nb-card-body>
             <form *ngIf="associate" (ngSubmit)="onSubmit(associateForm)" #associateForm="ngForm">
               <nb-tabset fullWidth>
@@ -108,7 +108,7 @@
                       <div class="form-group">
                         <label for="role">Cargo <span class="required">*</span></label>
                         <input type="text" class="form-control" id="role" placeholder="Cargo"
-                          name="role" required [(ngModel)]="associate.name" #role="ngModel"
+                          name="role" required [(ngModel)]="associate.role" #role="ngModel"
                           [ngClass]="getControlValidationClasses(role)">
                         <div class="form-control-validation-error">
                           Por favor, informe um cargo
@@ -116,9 +116,15 @@
                       </div>
                     </div>
                   </div>
+
+                  <associate-dependents></associate-dependents>
+
                 </nb-tab>
 
                 <nb-tab tabTitle="Informações complementares">
+                  
+                  <associate-wishlist></associate-wishlist>
+
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">

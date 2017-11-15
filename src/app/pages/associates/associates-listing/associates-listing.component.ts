@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { LocalDataSource } from 'ng2-smart-table';
 
-import { SmartTableService } from '../../../@core/data/smart-table.service';
 import { DialogService } from '../../../@common/dialog/dialog.service';
 import { ToasterConfigService } from '../../../@common/toaster-additions/toaster-config.service';
 import { ToasterFactoryService } from '../../../@common/toaster-additions/toaster-factory.service';
