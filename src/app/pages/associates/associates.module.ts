@@ -14,6 +14,7 @@ import { AssociateWishlistComponent } from './associate-wishlist/associate-wishl
 
 import { SwitcherComponent } from '../../@common/switcher/switcher.component';
 import { GenderSelectorComponent } from '../../@common/gender-selector/gender-selector.component';
+import { ImageUploaderComponent } from '../../@common/image-uploader/image-uploader.component';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { GenderSelectorComponent } from '../../@common/gender-selector/gender-se
     AssociateWishlistComponent,
     SwitcherComponent,
     GenderSelectorComponent,
+    ImageUploaderComponent,
   ],
   providers: [
     AssociatesService,

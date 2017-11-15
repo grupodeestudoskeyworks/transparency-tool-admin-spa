@@ -1,0 +1,19 @@
+<label class="uploader" ondragover="return false;"
+  [ngClass]="{ 'loaded': loaded, 'dragging': dragging }" 
+  (dragenter)="handleDragEnter()"
+  (dragleave)="handleDragLeave()"
+  (drop)="handleDrop($event)">
+
+  <i class="fa"
+    [ngClass]="{ 'loaded fa-pencil': imageLoaded, 'fa-user': !imageLoaded, 'dragging': dragging }">
+  </i>
+
+  <img 
+    [src]="imageSrc" 
+    (load)="handleImageLoad()" 
+    [class.loaded]="imageLoaded"/>
+
+  <input type="file" name="file" accept="image/*"
+    (change)="handleInputChange($event)">
+    
+</label>
