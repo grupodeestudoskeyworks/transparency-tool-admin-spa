@@ -8,7 +8,8 @@ import { ToasterAdditionsModule } from '../../@common/toaster-additions/toaster-
 import { Ng2SmartTableAdditionsModule } from '../../@common/ng2-smart-table-additions/ng2-smart-table-additions.module';
 import { AssociatesRoutingModule, routedComponents } from './associates-routing.module';
 import { AssociatesService } from './associates.service';
-
+import { SwitcherComponent } from '../../@common/switcher/switcher.component';
+import { GenderSelectorComponent } from '../../@common/gender-selector/gender-selector.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,8 @@ import { AssociatesService } from './associates.service';
   ],
   declarations: [
     ...routedComponents,
+    SwitcherComponent,
+    GenderSelectorComponent,
   ],
   providers: [
     AssociatesService,

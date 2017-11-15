@@ -1,0 +1,155 @@
+<div class="row">
+  <div class="col-lg-12">
+    <nb-card>
+        <toaster-container [toasterconfig]="toasterConfigService.getDefaultConfig()"></toaster-container>
+
+        <nb-card-header>Cadastro do associado</nb-card-header>
+        <nb-card-body>
+            <form *ngIf="associate" (ngSubmit)="onSubmit(associateForm)" #associateForm="ngForm">
+              <nb-tabset fullWidth>
+                <nb-tab tabTitle="Dados gerais">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="join-date">Data da associação <span class="required">*</span></label>
+                        <input type="date" class="form-control" id="join-date"
+                          name="joinDate" required [(ngModel)]="associate.joinDate" #joinDate="ngModel"
+                          [ngClass]="getControlValidationClasses(joinDate)">
+                        <div class="form-control-validation-error">
+                          Por favor, informe uma data de associação
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="active">Ativo?</label>
+                        <switcher id="active" [(value)]="associate.active"></switcher>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="name">Nome <span class="required">*</span></label>
+                        <input type="text" class="form-control" id="name" placeholder="Nome"
+                          name="name" required [(ngModel)]="associate.name" #name="ngModel"
+                          [ngClass]="getControlValidationClasses(name)">
+                        <div class="form-control-validation-error">
+                          Por favor, informe um nome
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="birthday">Aniversário <span class="required">*</span></label>
+                        <input type="date" class="form-control" id="birthday"
+                          name="birthday" required [(ngModel)]="associate.birthday" #birthday="ngModel"
+                          [ngClass]="getControlValidationClasses(birthday)">
+                        <div class="form-control-validation-error">
+                          Por favor, informe uma data de aniversário
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="gender">Se define como <span class="required">*</span></label>
+                        <gender-selector [(gender)]="associate.gender" id="gender"></gender-selector>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="student">Estudante?</label>
+                        <switcher id="student" [(value)]="associate.student"></switcher>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="phone">Telefone <span class="required">*</span></label>
+                        <input type="tel" class="form-control" id="phone" placeholder="Telefone"
+                          name="phone" required [(ngModel)]="associate.phone" #phone="ngModel"
+                          [ngClass]="getControlValidationClasses(phone)">
+                        <div class="form-control-validation-error">
+                          Por favor, informe um telefone
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="email">E-mail <span class="required">*</span></label>
+                        <input type="email" class="form-control" id="email" placeholder="E-mail"
+                          name="email" required email [(ngModel)]="associate.email" #email="ngModel"
+                          [ngClass]="getControlValidationClasses(email)">
+                        <div *ngIf="email.errors && email.errors.required" class="form-control-validation-error">
+                          Por favor, informe um e-mail
+                        </div>
+                        <div *ngIf="email.errors && !email.errors.required && email.errors.email" class="form-control-validation-error">
+                          Por favor, informe um endereço de e-mail válido
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="partner">Cônjuge</label>
+                        <input type="text" class="form-control" id="partner" placeholder="Nome do cônjugue"
+                          name="partner" [(ngModel)]="associate.partner">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="role">Cargo <span class="required">*</span></label>
+                        <input type="text" class="form-control" id="role" placeholder="Cargo"
+                          name="role" required [(ngModel)]="associate.name" #role="ngModel"
+                          [ngClass]="getControlValidationClasses(role)">
+                        <div class="form-control-validation-error">
+                          Por favor, informe um cargo
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </nb-tab>
+
+                <nb-tab tabTitle="Informações complementares">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="food-restrictions">Restrições alimentares</label>
+                        <textarea rows="5" placeholder="Informe no máximo 4000 caracteres" class="form-control"
+                          id="food-restrictions" name="foodRestrictions" [(ngModel)]="associate.foodRestrictions"
+                          maxlength="4000">
+                        </textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="preferred-events-days">Melhores dias para eventos</label>
+                        <textarea rows="3" placeholder="Informe no máximo 2000 caracteres" class="form-control"
+                          id="preferred-events-days" name="preferredEventsDays" [(ngModel)]="associate.preferredEventsDays"
+                          maxlength="2000">
+                        </textarea>
+                      </div>
+                    </div>
+                  </div>
+                </nb-tab>
+              </nb-tabset>
+              
+              <hr />
+
+              <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Salvar</button>
+              <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Excluir</button>
+              <button type="button" class="btn btn-secondary"><i class="fa fa-ban"></i> Cancelar</button>
+              <button type="button" class="btn btn-secondary"><i class="fa fa-eraser"></i> Limpar</button>
+            </form>
+        </nb-card-body>
+    </nb-card>
+  </div>
+</div>

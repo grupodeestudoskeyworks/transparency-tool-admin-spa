@@ -14,7 +14,7 @@ export class ToasterConfigService {
     limit: 5,
   });
 
-  getDefaultConfig() : ToasterConfig {
+  getDefaultConfig(): ToasterConfig {
     return this._defaultConfig;
   }
 }

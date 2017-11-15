@@ -1,4 +1,4 @@
-import { DialogOptions } from "../dialog-options";
+import { DialogOptions } from '../dialog-options';
 
 export class ConfirmDialogOptions extends DialogOptions {
   yesButtonLabel?: string;

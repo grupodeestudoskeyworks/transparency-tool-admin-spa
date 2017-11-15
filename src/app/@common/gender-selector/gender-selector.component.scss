@@ -1,0 +1,28 @@
+$male-radio-button-color: #00b2ff;
+$female-radio-button-color: #ff38a7;
+
+.icon-radio-group {
+  .custom-radio:hover {
+    &.male-radio-button {
+      color: $male-radio-button-color;
+    }
+    
+    &.female-radio-button {
+      color: $female-radio-button-color;
+    }
+  }
+
+  .custom-radio.male-radio-button .custom-control-input:checked {
+    & ~ .icon-indicator,
+    & ~ span {
+      color: $male-radio-button-color;
+    }
+  }
+
+  .custom-radio.female-radio-button .custom-control-input:checked {
+    & ~ .icon-indicator,
+    & ~ span {
+      color: $female-radio-button-color;
+    }
+  }
+}

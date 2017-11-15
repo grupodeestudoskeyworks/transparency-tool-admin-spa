@@ -6,7 +6,7 @@ import { ConfirmDialogOptions } from './confirm-dialog-options';
 
 @Component({
   selector: 'confirm-dialog',
-  templateUrl: './confirm-dialog.component.html'
+  templateUrl: './confirm-dialog.component.html',
 })
 export class ConfirmDialogComponent {
   constructor(private activeModal: NgbActiveModal) {
@@ -14,11 +14,11 @@ export class ConfirmDialogComponent {
 
   options: ConfirmDialogOptions;
 
-  get yesButtonLabel(): string { 
+  get yesButtonLabel(): string {
     return this.options.yesButtonLabel || 'Sim';
   }
 
-  get noButtonLabel(): string { 
+  get noButtonLabel(): string {
     return this.options.noButtonLabel || 'Não';
   }
 
@@ -28,8 +28,9 @@ export class ConfirmDialogComponent {
   }
 
   cancel(): void {
-    if (this.options.onCancel instanceof Function)
+    if (this.options.onCancel instanceof Function) {
       this.options.onCancel();
+    }
     this.activeModal.close();
   }
 

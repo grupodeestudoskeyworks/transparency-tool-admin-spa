@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { LocalDataSource } from 'ng2-smart-table';
 
@@ -7,7 +8,7 @@ import { DialogService } from '../../../@common/dialog/dialog.service';
 import { ToasterConfigService } from '../../../@common/toaster-additions/toaster-config.service';
 import { ToasterFactoryService } from '../../../@common/toaster-additions/toaster-factory.service';
 import { EmailLinkViewCellComponent } from '../../../@common/ng2-smart-table-additions/email-link-view-cell.component';
-import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
+import { ToasterService } from 'angular2-toaster';
 import { AssociatesService } from '../associates.service';
 
 import 'style-loader!angular2-toaster/toaster.css';
@@ -24,7 +25,7 @@ export class AssociatesListingComponent implements OnInit {
     noDataMessage: 'Nenhum associado para exibir aqui.',
     actions: {
       columnTitle: 'Ações',
-      add: false
+      add: false,
     },
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
@@ -49,8 +50,8 @@ export class AssociatesListingComponent implements OnInit {
         title: 'Data de nascimento',
         type: 'text',
         filter: false,
-        valuePrepareFunction: (cell: Date, row) => 
-          cell.toLocaleDateString()
+        valuePrepareFunction: (cell: Date, row) =>
+          cell.toLocaleDateString(),
       },
       phone: {
         title: 'Telefone',
@@ -59,19 +60,21 @@ export class AssociatesListingComponent implements OnInit {
       email: {
         title: 'E-mail',
         type: 'custom',
-        renderComponent: EmailLinkViewCellComponent
-      }
-    }
+        renderComponent: EmailLinkViewCellComponent,
+      },
+    },
   };
 
   source: LocalDataSource = new LocalDataSource();
 
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private dialogService: DialogService,
     private toasterService: ToasterService,
     private toasterConfigService: ToasterConfigService,
     private toasterFactoryService: ToasterFactoryService,
-    private associatesService: AssociatesService
+    private associatesService: AssociatesService,
   ) { }
 
   ngOnInit() {
@@ -79,29 +82,32 @@ export class AssociatesListingComponent implements OnInit {
   }
 
   getAssociates() {
-    this.associatesService.getAssociates(error => 
+    this.associatesService.getAssociates(error =>
       this.toasterService.popAsync(
-        this.toasterFactoryService.error(error)
-      )
+        this.toasterFactoryService.error(error),
+      ),
     )
       .subscribe(data => this.source.load(data));
   }
 
   goToDetails(event): void {
-    alert(`visualizando registro de id ${event.data.id}`);
+    this.router.navigate(
+      ['../detail', event.data.id ],
+      { relativeTo: this.route },
+    );
   }
 
   deleteRecord(event): void {
     this.dialogService.confirm({
       header: 'Confirmar exclusão',
       content: 'Deseja realmente excluir o associado?',
-      onConfirm: () => 
+      onConfirm: () =>
         this.toasterService.popAsync(
-          this.toasterFactoryService.success('Associado excluído com sucesso.')
+          this.toasterFactoryService.success('Associado excluído com sucesso.'),
         ),
       onCancel: () => {
-        alert('cancelou')
-      }
+        alert('cancelou');
+      },
     });
   }
 }

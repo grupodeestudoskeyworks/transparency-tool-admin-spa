@@ -17,4 +17,24 @@
 
   // loading progress bar
   @include ngx-pace-theme();
+
+  .icon-radio-group {
+    .custom-radio:hover {
+      color: nb-theme(color-fg-highlight);
+      cursor: pointer;
+    }
+
+    .custom-radio .custom-control-input:checked {
+      & ~ .icon-indicator,
+      & ~ span {
+        color: nb-theme(color-fg-highlight);
+      }
+    }
+
+    .icon-indicator {
+      width: 1.25rem;
+      height: 1.25rem;
+      font-size: 1.25rem;
+    }
+  }
 };

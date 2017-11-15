@@ -9,34 +9,46 @@ import { BaseModel } from '../../@core/models/base-model';
 import { Associate } from './associate';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
 
 @Injectable()
 export class AssociatesService {
 
   private associatesUrl = 'api/associates';
+  private cachedAssociates: Associate[] = [];
 
   constructor(private http: HttpClient) { }
 
-  getAssociates(handleError: (error) => void) : Observable<Associate[]> {
-    return this.http.get<Associate[]>(this.associatesUrl)
-      .map(associates => associates.map(({ birthday, ...rest }) => {
-        return { birthday: new Date(birthday), ...rest }
-      }))
+  getAssociates(handleError: (error) => void): Observable<Associate[]> {
+    return  this.http.get<Associate[]>(this.associatesUrl)
+      .map(associates => associates.map(this.mapAssociateProps))
       .pipe(
-        catchError(this.handleError<Associate>(handleError))
-      )
+        catchError(this.handleError<Associate[]>(handleError, [])),
+      );
   }
 
-  private handleError<T extends BaseModel> (handleError: (error) => void, result: T[] = []) {
-    return (error: any): Observable<T[]> => {
- 
+  getAssociate(id: string, handleError: (error) => void): Observable<Associate> {
+    return this.http.get<Associate>(`${this.associatesUrl}/${id}`)
+      .map(this.mapAssociateProps)
+      .pipe(
+        catchError(this.handleError<Associate>(handleError, new Associate())),
+      );
+  }
+
+  private mapAssociateProps(associate: Associate): Associate {
+    const { birthday, ...rest } = associate;
+    return { birthday: new Date(birthday), ...rest };
+  }
+
+  private handleError<T> (handleError: (error) => void, result: T) {
+    return (error: any): Observable<T> => {
+
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
- 
+
       handleError(this.getErrorMessage(error));
-      
+
       console.info(result);
 
       // Let the app keep running by returning an empty result.
@@ -44,7 +56,7 @@ export class AssociatesService {
     };
   }
 
-  private getErrorMessage(error: any) : string {
+  private getErrorMessage(error: any): string {
     return (error as HttpErrorResponse).message;
   }
 }

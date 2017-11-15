@@ -19,6 +19,6 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
   ],
   entryComponents: [
     ConfirmDialogComponent,
-  ]
+  ],
 })
 export class DialogModule { }

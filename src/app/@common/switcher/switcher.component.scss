@@ -1,0 +1,61 @@
+@import '../../@theme/styles/themes';
+@import '~@nebular/theme/styles/global/bootstrap/hero-buttons';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/bootstrap/breakpoints';
+
+@include nb-install-component() {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 50%;
+
+  .switcher {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    cursor: pointer;
+    margin: 0;
+  }
+
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 6rem;
+    height: 2.75rem;
+    margin: 0;
+
+    input {
+      display: none;
+
+      &:checked + .slider::before {
+        transform: translateX(3.25rem);
+      }
+    }
+
+    .slider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 1.75rem;
+      background-color: rgba(nb-theme(color-danger), 0.6);
+    }
+
+    .slider::before {
+      position: absolute;
+      content: '';
+      height: 2.75rem;
+      width: 2.75rem;
+      border-radius: 50%;
+      background-color: opacify(nb-theme(color-bg), 0.3);
+      transition: 0.2s;
+
+      box-shadow: 0 0 0.25rem 0 rgba(nb-theme(color-fg), 0.4);
+    }
+
+    .slider.checked {
+      background-color: rgba(nb-theme(color-success), 0.6);
+    }
+  }
+}

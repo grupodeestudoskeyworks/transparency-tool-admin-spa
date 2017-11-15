@@ -1,0 +1,6 @@
+<label class="switcher">
+    <div class="switch">
+      <input type="checkbox" [checked]="value" (change)="change(checkbox.checked)" #checkbox>
+      <span class="slider" [ngClass]="{ 'checked': value }"></span>
+    </div>
+  </label>
