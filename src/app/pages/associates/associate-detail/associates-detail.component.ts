@@ -65,6 +65,10 @@ export class AssociatesDetailComponent implements OnInit {
     };
   }
 
+  clearForm(): void {
+    this.associate = new Associate();
+  }
+
   onSubmit(formGroup: FormGroup) {
     if (!formGroup.valid) {
       this.validateAllFormFields(formGroup);

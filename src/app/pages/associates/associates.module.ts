@@ -15,6 +15,7 @@ import { AssociateWishlistComponent } from './associate-wishlist/associate-wishl
 import { SwitcherComponent } from '../../@common/switcher/switcher.component';
 import { GenderSelectorComponent } from '../../@common/gender-selector/gender-selector.component';
 import { ImageUploaderComponent } from '../../@common/image-uploader/image-uploader.component';
+import { DatepickerModule } from '../../@common/datepicker/datepicker.module';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { ImageUploaderComponent } from '../../@common/image-uploader/image-uploa
     ToasterAdditionsModule,
     Ng2SmartTableAdditionsModule,
     AssociatesRoutingModule,
+    DatepickerModule,
   ],
   declarations: [
     ...routedComponents,
