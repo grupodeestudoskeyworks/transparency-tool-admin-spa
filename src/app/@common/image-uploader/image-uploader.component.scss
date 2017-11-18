@@ -49,15 +49,6 @@
     font-size: 7em;
     position: relative;
 
-    &.loaded {
-      color: nb-theme(color-fg-heading);
-      font-size: 1em;
-      position: absolute;
-      bottom: 0.3rem;
-      right: 0.3rem;
-      z-index: 2;
-    }
-
     &.dragging {
       color: nb-theme(color-success);
     }
@@ -84,5 +75,32 @@
 
   .uploader img.loaded {
     opacity: 1;
+  }
+
+  i.remove {
+    cursor: pointer;
+    color: nb-theme(color-danger);
+    font-size: 1em;
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    z-index: 25;
+
+    -webkit-transition: all 300ms ease-in;
+    -moz-transition: all 300ms ease-in;
+    -ms-transition: all 300ms ease-in;
+    -o-transition: all 300ms ease-in;
+    transition: all 300ms ease-in;
+
+    &:hover {
+      font-size: 12rem;
+      bottom: -5px;
+      left: 8px;
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
   }
 }

@@ -4,9 +4,7 @@
   (dragleave)="handleDragLeave()"
   (drop)="handleDrop($event)">
 
-  <i class="fa"
-    [ngClass]="{ 'loaded fa-pencil': imageLoaded, 'fa-user': !imageLoaded, 'dragging': dragging }">
-  </i>
+  <i *ngIf="!imageLoaded" class="fa fa-user" [class.dragging]="dragging"></i>
 
   <img 
     [src]="imageSrc" 
@@ -17,3 +15,4 @@
     (change)="handleInputChange($event)">
     
 </label>
+<a *ngIf="imageLoaded" (click)="removeImage()"><i class="fa fa-times remove"></i></a>

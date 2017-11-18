@@ -1,19 +1,40 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, forwardRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 @Component({
   selector: 'image-uploader',
   templateUrl: './image-uploader.component.html',
   styleUrls: [ './image-uploader.component.scss' ],
+  providers: [
+    { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => ImageUploaderComponent), multi: true },
+  ],
 })
-export class ImageUploaderComponent {
-  @Input() activeColor = 'green';
-  @Input() baseColor = '#ccc';
-  @Input() overlayColor = 'rgba(255,255,255,0.5)';
-
+export class ImageUploaderComponent implements ControlValueAccessor {
   dragging = false;
   loaded = false;
   imageLoaded = false;
   imageSrc = '';
+
+  registerOnChangeCallback: (_) => { };
+  registerOnTouchedCallback: (_) => { };
+
+  writeValue(val: string) {
+    if (val) {
+      this.imageLoaded = this.loaded = true;
+      this.imageSrc = val;
+    } else {
+      this.imageLoaded = this.loaded = false;
+      this.imageSrc = '';
+    }
+  }
+
+  registerOnChange(fn: (_) => { }) {
+    this.registerOnChangeCallback = fn;
+  }
+
+  registerOnTouched(fn: (_) => { }) {
+    this.registerOnTouchedCallback = fn;
+  }
 
   handleDragEnter() {
     this.dragging = true;
@@ -31,6 +52,13 @@ export class ImageUploaderComponent {
 
   handleImageLoad() {
     this.imageLoaded = true;
+  }
+
+  removeImage() {
+    this.imageLoaded = this.loaded = false;
+    this.registerOnChangeCallback(
+      this.imageSrc = '',
+    );
   }
 
   handleInputChange(e) {
@@ -52,7 +80,9 @@ export class ImageUploaderComponent {
 
   _handleReaderLoaded(e) {
     const reader = e.target;
-    this.imageSrc = reader.result;
     this.loaded = true;
+    this.registerOnChangeCallback(
+      this.imageSrc = reader.result,
+    );
   }
 }
