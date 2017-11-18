@@ -1,14 +1,14 @@
 <div class="icon-radio-group radio-group">
-    <label class="custom-control custom-radio male-radio-button">
-      <input type="radio" class="custom-control-input" 
-        [(ngModel)]="gender" [value]="male" (ngModelChange)="genderChange.emit(gender)">
-      <i class="icon-indicator fa fa-mars"></i>
-      <span class="custom-control-description">Menino</span>
-    </label>
-    <label class="custom-control custom-radio female-radio-button">
-      <input type="radio" class="custom-control-input" 
-        [(ngModel)]="gender" [value]="female" (ngModelChange)="genderChange.emit(gender)">
-      <i class="icon-indicator fa fa-venus"></i>
-      <span class="custom-control-description">Menina</span>
-    </label>
+  <label class="custom-control custom-radio male-radio-button">
+    <input type="radio" class="custom-control-input" 
+      [(ngModel)]="gender" [value]="male" (ngModelChange)="registeredOnChangeCallback(gender)">
+    <i class="icon-indicator fa fa-mars"></i>
+    <span class="custom-control-description">Menino</span>
+  </label>
+  <label class="custom-control custom-radio female-radio-button">
+    <input type="radio" class="custom-control-input" 
+      [(ngModel)]="gender" [value]="female" (ngModelChange)="registeredOnChangeCallback(gender)">
+    <i class="icon-indicator fa fa-venus"></i>
+    <span class="custom-control-description">Menina</span>
+  </label>
 </div>

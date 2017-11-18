@@ -51,7 +51,12 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="gender">Se define como <span class="required">*</span></label>
-                        <gender-selector [(gender)]="associate.gender" id="gender"></gender-selector>
+                        <gender-selector id="gender" name="gender" [(ngModel)]="associate.gender"
+                          required #gender="ngModel" [ngClass]="getControlValidationClasses(gender)">
+                        </gender-selector>
+                        <div class="form-control-validation-error">
+                          Por favor, informe o gênero
+                        </div>
                       </div>
                     </div>
                     <div class="col-md-6">

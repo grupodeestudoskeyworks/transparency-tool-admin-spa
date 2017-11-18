@@ -1,4 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, forwardRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 import { Gender } from './gender-enum';
 
@@ -6,16 +7,32 @@ import { Gender } from './gender-enum';
   selector: 'gender-selector',
   templateUrl: './gender-selector.component.html',
   styleUrls: [ './gender-selector.component.scss' ],
+  providers: [
+    { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => GenderSelectorComponent), multi: true },
+  ],
 })
-export class GenderSelectorComponent {
-  @Input() gender: Gender;
-  @Output() genderChange = new EventEmitter<Gender>();
+export class GenderSelectorComponent implements ControlValueAccessor {
+  gender: Gender;
 
   female = Gender.Female;
   male = Gender.Male;
 
-  setGender(gender: Gender) {
-    this.gender = gender;
-    this.genderChange.emit(this.gender);
+  registeredOnChangeCallback: (_) => { };
+  registeredOnTouchedCallback: (_) => { };
+
+  writeValue(val: Gender) {
+    if (val) {
+      this.gender = val;
+    } else {
+      this.gender = Gender.Unset;
+    }
+  }
+
+  registerOnChange(fn: (_) => { }) {
+    this.registeredOnChangeCallback = fn;
+  }
+
+  registerOnTouched(fn: (_) => { }) {
+    this.registeredOnTouchedCallback = fn;
   }
 }
