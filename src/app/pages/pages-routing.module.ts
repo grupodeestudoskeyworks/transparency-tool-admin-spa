@@ -14,18 +14,6 @@ const routes: Routes = [{
     path: 'associates',
     loadChildren: './associates/associates.module#AssociatesModule',
   }, {
-    path: 'ui-features',
-    loadChildren: './ui-features/ui-features.module#UiFeaturesModule',
-  }, {
-    path: 'components',
-    loadChildren: './components/components.module#ComponentsModule',
-  }, {
-    path: 'forms',
-    loadChildren: './forms/forms.module#FormsModule',
-  }, {
-    path: 'tables',
-    loadChildren: './tables/tables.module#TablesModule',
-  }, {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',

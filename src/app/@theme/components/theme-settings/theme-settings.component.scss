@@ -16,10 +16,35 @@
     margin: 0 0 1rem;
 
     a {
+      transition: all ease-in 300ms;
       text-decoration: none;
       font-size: 2.25rem;
+      color: nb-theme(header-fg);
 
-      color: nb-theme(color-fg);
+      &.color {
+        height: 1.2rem;
+        width: 1.2rem;
+        border: 0.085rem solid nb-theme(header-fg);
+        padding: 0.8rem;
+        border-radius: 50%;
+
+        &.cosmic {
+          background: #2f296b;
+        }
+  
+        &.default {
+          background: #ffffff;
+        }
+
+        &.selected {
+          border: 0.1rem solid nb-theme(color-success);
+        }
+
+        &:hover {
+          height: 2rem;
+          width: 2rem;
+        }
+      }
 
       &.selected {
         color: nb-theme(color-success);

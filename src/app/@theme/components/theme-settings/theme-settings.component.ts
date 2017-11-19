@@ -1,44 +1,52 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+import { NbThemeService } from '@nebular/theme';
+import { NbJSThemeOptions } from '@nebular/theme/services/js-themes/theme.options';
+
 import { StateService } from '../../../@core/data/state.service';
+import { AnalyticsService } from '../../../@core/utils/analytics.service';
+
+class AvailableTheme {
+  name: string;
+  selected: boolean;
+}
 
 @Component({
   selector: 'ngx-theme-settings',
-  styleUrls: ['./theme-settings.component.scss'],
-  template: `
-    <h6>LAYOUTS</h6>
-    <div class="settings-row">
-      <a *ngFor="let layout of layouts"
-         href="#"
-         [class.selected]="layout.selected"
-         [attr.title]="layout.name"
-         (click)="layoutSelect(layout)">
-        <i [attr.class]="layout.icon"></i>
-      </a>
-    </div>
-    <h6>SIDEBAR</h6>
-    <div class="settings-row">
-      <a *ngFor="let sidebar of sidebars"
-         href="#"
-         [class.selected]="sidebar.selected"
-         [attr.title]="sidebar.name"
-         (click)="sidebarSelect(sidebar)">
-        <i [attr.class]="sidebar.icon"></i>
-      </a>
-    </div>
-  `,
+  templateUrl: './theme-settings.component.html',
+  styleUrls: [ './theme-settings.component.scss' ],
 })
 export class ThemeSettingsComponent {
+
+  theme: NbJSThemeOptions;
 
   layouts = [];
   sidebars = [];
 
-  constructor(protected stateService: StateService) {
+  availableThemes: AvailableTheme[] = [
+    {
+      name: 'default',
+      selected: true,
+    },
+    {
+      name: 'cosmic',
+      selected: false,
+    },
+  ];
+
+  constructor(
+    protected stateService: StateService,
+    protected themeService: NbThemeService,
+    protected analyticsService: AnalyticsService,
+  ) {
     this.stateService.getLayoutStates()
       .subscribe((layouts: any[]) => this.layouts = layouts);
 
     this.stateService.getSidebarStates()
       .subscribe((sidebars: any[]) => this.sidebars = sidebars);
+
+    this.themeService.getJsTheme()
+      .subscribe((theme: NbJSThemeOptions) => this.theme = theme);
   }
 
   layoutSelect(layout: any): boolean {
@@ -60,6 +68,17 @@ export class ThemeSettingsComponent {
 
     sidebars.selected = true;
     this.stateService.setSidebarState(sidebars);
+    return false;
+  }
+
+  themeSelect(theme: AvailableTheme): boolean {
+    theme.selected = true;
+
+    this.availableThemes.filter(t => t !== theme)
+      .forEach(t => t.selected = false);
+
+    this.themeService.changeTheme(theme.name);
+    this.analyticsService.trackEvent('switchTheme');
     return false;
   }
 }

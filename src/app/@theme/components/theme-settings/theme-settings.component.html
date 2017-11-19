@@ -1,0 +1,18 @@
+<h6>COR</h6>
+<div class="settings-row">
+  <a *ngFor="let theme of availableThemes"
+    href="#"
+    [attr.class]="'color ' + theme.name"
+    [class.selected]="theme.selected"
+    (click)="themeSelect(theme)">
+  </a>
+</div>
+<h6>MENU</h6>
+<div class="settings-row">
+  <a *ngFor="let sidebar of sidebars"
+     href="#"
+     [class.selected]="sidebar.selected"
+     (click)="sidebarSelect(sidebar)">
+    <i [attr.class]="sidebar.icon"></i>
+  </a>
+</div>
