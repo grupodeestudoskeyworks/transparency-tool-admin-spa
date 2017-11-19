@@ -13,11 +13,11 @@ import { AssociatesService } from '../associates.service';
 import 'style-loader!angular2-toaster/toaster.css';
 
 @Component({
-  selector: 'associates-listing',
-  templateUrl: './associates-listing.component.html',
-  styles: [ './associates-listing.component.scss' ],
+  selector: 'associates-list',
+  templateUrl: './associates-list.component.html',
+  styles: [ './associates-list.component.scss' ],
 })
-export class AssociatesListingComponent implements OnInit {
+export class AssociatesListComponent implements OnInit {
 
   settings = {
     mode: 'external',

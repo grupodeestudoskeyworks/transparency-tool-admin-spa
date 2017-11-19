@@ -31,7 +31,11 @@ export class AssociatesDetailComponent implements OnInit {
   }
 
   getAssociate() {
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = parseInt(this.route.snapshot.paramMap.get('id'), 0);
+    if (Number.isNaN(id)) {
+      this.associate = new Associate();
+      return;
+    }
 
     this.associatesService.getAssociate(id, error =>
       this.toasterService.popAsync(

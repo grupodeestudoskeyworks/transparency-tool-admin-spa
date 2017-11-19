@@ -10,6 +10,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Associados',
     icon: 'ion-ios-people',
-    link: '/pages/associates/listing',
+    link: '/pages/associates/list',
   },
 ];

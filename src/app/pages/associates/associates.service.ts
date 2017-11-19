@@ -28,7 +28,7 @@ export class AssociatesService {
       );
   }
 
-  getAssociate(id: string, handleError: (error) => void): Observable<Associate> {
+  getAssociate(id: number, handleError: (error) => void): Observable<Associate> {
     return this.http.get<Associate>(`${this.associatesUrl}/${id}`)
       .map(this.mapAssociateProps)
       .pipe(

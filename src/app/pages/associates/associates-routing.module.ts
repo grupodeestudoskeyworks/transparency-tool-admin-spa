@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AssociatesComponent } from './associates.component';
-import { AssociatesListingComponent } from './associates-listing/associates-listing.component';
+import { AssociatesListComponent } from './associates-listing/associates-list.component';
 import { AssociatesDetailComponent } from './associate-detail/associates-detail.component';
 
 const routes: Routes = [{
@@ -10,11 +10,15 @@ const routes: Routes = [{
   component: AssociatesComponent,
   children: [
     {
-      path: 'listing',
-      component: AssociatesListingComponent,
+      path: 'list',
+      component: AssociatesListComponent,
     },
     {
-      path: 'detail/:id',
+      path: 'edit/:id',
+      component: AssociatesDetailComponent,
+    },
+    {
+      path: 'create',
       component: AssociatesDetailComponent,
     },
   ],
@@ -34,6 +38,6 @@ export class AssociatesRoutingModule {
 
 export const routedComponents = [
   AssociatesComponent,
-  AssociatesListingComponent,
+  AssociatesListComponent,
   AssociatesDetailComponent,
 ];

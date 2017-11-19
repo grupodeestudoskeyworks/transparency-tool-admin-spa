@@ -163,8 +163,8 @@
               <hr />
 
               <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Salvar</button>
-              <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Excluir</button>
-              <button type="button" class="btn btn-secondary"><i class="fa fa-ban"></i> Cancelar</button>
+              <button *ngIf="associate.id" type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Excluir</button>
+              <a routerLink="/pages/associates/list" class="btn btn-secondary"><i class="fa fa-ban"></i> Cancelar</a>
               <button type="button" class="btn btn-secondary" (click)="clearForm()"><i class="fa fa-eraser"></i> Limpar</button>
             </form>
         </nb-card-body>
