@@ -1,4 +1,4 @@
-# Interface para administração da Ferramenta de Tranparência
+# Interface para administração da Ferramenta de Transparência
 
 ### Iniciando
 ```
